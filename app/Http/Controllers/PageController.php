@@ -40,5 +40,10 @@ class PageController extends Controller
     {
         return view('pages.sports');
     }
+    // upload page
+    public function upload()
+    {
+        return view('pages.upload');
+    }
 
 }

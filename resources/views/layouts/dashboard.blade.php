@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEWSai - नेपालको नम्बर १ समाचार पोर्टल</title>
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap"
@@ -17,14 +17,16 @@
 
   <body>
 
-    <x-dashboard.header></x-dashboard.header>
+    {{-- <x-dashboard.header></x-dashboard.header> --}}
     <!-- Main Content -->
+    <x-dashboard.sidebar></x-dashboard.sidebar>
     <main class="main-content">
       @yield('content')
     </main>
-    <x-dashboard.footer></x-dashboard.footer>
+    {{-- <x-dashboard.footer></x-dashboard.footer> --}}
 
-<script src="script.js"></script>
+    {{-- <script src="script.js"></script> --}}
   </body>
 </html>
+
     
