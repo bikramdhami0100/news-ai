@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 // Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 // dashboard routes
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::get('/dashboard/upload-news',[DashboardController::class,'upload_news'])->name('dashboard.upload-news');
 
 
 // page routes

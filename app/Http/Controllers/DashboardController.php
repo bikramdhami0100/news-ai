@@ -13,4 +13,8 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
     
+    public function upload_news()
+    {
+        return view('dashboard.pages.upload_news');
+    }
 }
