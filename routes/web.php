@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserAuthController;
 // Route::get('/', function () {
 //     return view('pages.index');
 // });
@@ -10,10 +11,15 @@ use App\Http\Controllers\DashboardController;
 
 // Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 // dashboard routes
-Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-Route::get('/dashboard/upload-news',[DashboardController::class,'upload_news'])->name('dashboard.upload-news');
-
-
+Route::get('/login',[UserAuthController::class,'login'])->name('login');
+Route::post('/login',[UserAuthController::class,'login'])->name('login.post');
+Route::get('/forgot-password',[UserAuthController::class,'forgot_password'])->name('forgot-password');
+Route::get('/register',[UserAuthController::class,'register'])->name('register');
+// use middleware for dashboard routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/upload-news', [DashboardController::class, 'upload_news'])->name('dashboard.upload-news');
+});
 // page routes
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/news', [PageController::class, 'index'])->name('news');
