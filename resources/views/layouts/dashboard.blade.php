@@ -20,6 +20,7 @@
     {{-- <x-dashboard.header></x-dashboard.header> --}}
     <!-- Main Content -->
     <x-dashboard.sidebar></x-dashboard.sidebar>
+     <x-dashboard.header></x-dashboard.header>
     <main class="main-content">
       @yield('content')
     </main>

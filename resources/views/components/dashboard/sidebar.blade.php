@@ -222,6 +222,12 @@
                     <span class="menu-text">AI Generate</span>
                 </a>
             </li>
+                <li class="menu-item">
+                <a href="{{route('logout')}}" class="menu-link">
+                    <span class="menu-icon"><x-lucide-log-out class="w-6 h-6" /></span>
+                    <span class="menu-text">Log Out</span>
+                </a>
+            </li>
         </ul>
     </div>
 

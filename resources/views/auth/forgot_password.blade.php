@@ -230,9 +230,11 @@
 
         .form-group input {
             padding: 15px 15px 15px 45px;
-            border: 2px solid #e9ecef;
+            border: 2px solid #111315;
             border-radius: 10px;
+            width: 100%;
             font-size: 16px;
+
             font-family: 'Noto Sans Devanagari', sans-serif;
             transition: all 0.3s;
             background: #f8f9fa;

@@ -34,7 +34,25 @@
             grid-template-columns: 1fr 1fr;
             animation: slideIn 0.5s ease-out;
         }
-
+        .input-error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;            
+        }
+        .alert {
+            padding: 10px;
+            /* background-color: #f44336; */
+            height: 50px;
+            width: 100%;
+            border:Solid 1px #f44336;
+            border-radius: 5px;
+            color: white;
+            margin-bottom: 10px;
+            animation: slideIn 0.5s ease-out;
+        }
+        .alert-danger{
+            background-color: #f44336;
+        }
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -451,7 +469,11 @@
     </style>
 </head>
 <body>
+  
     <div class="login-container">
+         {{-- show error --}}
+         
+
         <!-- Left Side - Branding -->
         <div class="login-left">
             <div class="brand-content">
@@ -474,6 +496,11 @@
         <!-- Right Side - Login Form -->
         <div class="login-right">
             <div class="login-header">
+                  @if (session('error'))
+                      <div class="alert alert-danger">
+                          {{ session('error') }}
+                      </div>
+                  @endif
                 <h2>स्वागत छ!</h2>
                 <p>आफ्नो खातामा लगइन गर्नुहोस्</p>
             </div>
@@ -482,7 +509,7 @@
                 <!-- Error messages will be displayed here -->
             </div>
 
-            <form class="login-form" id="loginForm" action="{{ route('login.post') }}" method="POST">
+            <form class="login-form" id="loginForm" action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="email">इमेल ठेगाना</label>
@@ -495,8 +522,13 @@
                             placeholder="your@email.com" 
                             required
                             autocomplete="email"
+                            value="{{ old('email') }}"
                         >
                     </div>
+                    {{-- <span class="input-error" id="emailError"></span> --}}
+                    @error('email')
+                        <span class="input-error" id="emailError" >{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -504,14 +536,19 @@
                     <div class="input-wrapper">
                         <span class="input-icon">🔒</span>
                         <input 
-                            type="password" 
+                            type="text" 
                             id="password" 
                             name="password" 
                             placeholder="••••••••" 
                             required
+                            value="{{ old('password') }}"
                             autocomplete="current-password"
                         >
+
                     </div>
+                    @error('password')
+                        <span class="input-error" id="passwordError" >{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-options">
@@ -552,7 +589,22 @@
             </div>
         </div>
     </div>
+    <script>
+        // remove alert in 5 seconds
+        setTimeout(() => {
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                alert.remove();
+            }
+        }, 5000);
+        // loading login
+        // const loginForm = document.getElementById('loginForm');
+        // const loginBtn = loginForm.querySelector('.login-btn');
+        // loginBtn.addEventListener('click', () => {
+        //     loginBtn.classList.add('loading');
+        // });
 
+    </script>
     {{-- <script>
         // Form submission handling
         const loginForm = document.getElementById('loginForm');

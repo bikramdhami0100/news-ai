@@ -13,16 +13,26 @@ class UserAuthController extends Controller
     {
 
            if($request->isMethod('post')) {
+             // validate the request
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+                // 'remember' => 'boolean',
+            ]);
             $email = $request->input('email');
             $password = $request->input('password');
             $remember = $request->input('remember');
             $user=User::where('email',$email)->first();
             // return ['auth' => auth()];
             if(!auth()->attempt(['email' => $email, 'password' => $password], $remember)) {
-                return ['success' => false, 'message' => 'Invalid credentials'];
+                // show session error message
+                // session(['error' => 'Credentials do not match our records.']);
+                return redirect()->back()->with('error', 'Credentials do not match our records.')->withInput();
+
             }
             if(!$user) {
-                return ['success' => false, 'message' => 'User not found'];
+                // session(['error' => 'Credentials do not match our records.']);
+                return redirect()->back()->with('error', 'Credentials do not match our records.')->withInput();
             }
             // handle remember me functionality
             auth()->login($user, $remember);
@@ -30,8 +40,10 @@ class UserAuthController extends Controller
             return redirect()->route('dashboard');
             
             // return ['request' => $request->all(),'user' => $user];
+           }else {
+
+               return view('auth.login');
            }
-            return view('auth.login');
 
     }
 

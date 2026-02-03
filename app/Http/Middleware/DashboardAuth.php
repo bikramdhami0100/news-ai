@@ -15,13 +15,16 @@ class DashboardAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->check()) {
-            return redirect()->route('login')->with('error', 'You must be logged in to access the dashboard.');
-        }
-        // if(!auth()->check()) {
+        // if (!auth()->check()) {
         //     return redirect()->route('login')->with('error', 'You must be logged in to access the dashboard.');
         // }
-        echo ["user"=>auth()->user()];
+        if(!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to access the dashboard.');
+        }
+        // var_dump(auth()->check());
+
+        // echo "bikram dhami ji ";
+        // echo ["user"=>auth()->user()];
         return $next($request);
     }
 }

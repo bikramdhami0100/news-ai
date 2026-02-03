@@ -11,10 +11,11 @@ use App\Http\Controllers\UserAuthController;
 
 // Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 // dashboard routes
-Route::get('/login',[UserAuthController::class,'login'])->name('login');
-Route::post('/login',[UserAuthController::class,'login'])->name('login.post');
+Route::match(['get', 'post'], '/login',[UserAuthController::class,'login'])->name('login');
+// Route::post('/login',[UserAuthController::class,'login'])->name('login.post');
 Route::get('/forgot-password',[UserAuthController::class,'forgot_password'])->name('forgot-password');
 Route::get('/register',[UserAuthController::class,'register'])->name('register');
+Route::get('logout',[UserAuthController::class,'logout'])->name('logout');
 // use middleware for dashboard routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
