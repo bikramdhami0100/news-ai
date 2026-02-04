@@ -204,25 +204,25 @@
 
         <ul class="sidebar-menu">
             <li class="menu-item">
-                <a href="{{ route('dashboard') }}" class="menu-link active">
+                <a href="{{ route('dashboard') }}" class="menu-link <?= request()->routeIs('dashboard') ? 'active' : '' ?>">
                     <span class="menu-icon"><x-lucide-layout-dashboard class="w-6 h-6" /></span>
                     <span class="menu-text">Dashboard</span>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('dashboard.upload-news') }}" class="menu-link">
+                <a href="{{ route('dashboard.upload-news') }}" class="menu-link <?= request()->routeIs('dashboard.upload-news') ? 'active' : '' ?>">
                     <span class="menu-icon"><x-lucide-newspaper class="w-6 h-6" /></span>
                     <span class="menu-text">News Articles</span>
                     <span class="menu-badge">12</span>
                 </a>
             </li>
             <li class="menu-item">
-                <a href="#" class="menu-link">
+                <a href="#" class="menu-link <?= request()->routeIs('dashboard.ai-generate') ? 'active' : '' ?>">
                     <span class="menu-icon"><x-lucide-sparkles class="w-6 h-6" /></span>
                     <span class="menu-text">AI Generate</span>
                 </a>
             </li>
-                <li class="menu-item">
+                <li class="menu-item <?= request()->routeIs('dashboard.settings') ? 'active' : '' ?>">
                 <a href="{{route('logout')}}" class="menu-link">
                     <span class="menu-icon"><x-lucide-log-out class="w-6 h-6" /></span>
                     <span class="menu-text">Log Out</span>

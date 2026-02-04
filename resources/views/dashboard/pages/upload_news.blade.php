@@ -1,17 +1,203 @@
 @extends('layouts.dashboard')
 @section('title', 'समाचार अपलोड')
+<style>
+    /* --- Base & Layout Utilities --- */
+/* .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+} */
 
+/* --- Upload Form Section --- */
+.upload-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 2px solid #0f1011;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #dc3545;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* --- File Upload Styling --- */
+.file-upload {
+    position: relative;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    border: 2px dashed #dc3545;
+    border-radius: 8px;
+    background: #fff5f5;
+    color: #dc3545;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    justify-content: center;
+}
+
+.file-upload-label:hover {
+    background: #dc3545;
+    color: white;
+}
+
+.file-upload-label.file-selected {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #28a745;
+}
+
+/* --- Checkbox & Actions --- */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.terms-link {
+    color: #dc3545;
+    text-decoration: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+}
+
+.btn-primary {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.char-counter {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+}
+
+
+
+/* --- Utilities & Animations --- */
+.fa-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+    .upload-container {
+        padding: 20px;
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+    .page-header h1 {
+        font-size: 32px;
+    }
+}
+</style>
 @section('content')
-
+     {{-- <link rel="stylesheet" href="styles.css" /> --}}
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <h1>समाचार अपलोड</h1>
-                <p>तपाईंको समाचार साझा गर्नुहोस्</p>
-            </div>
-        </section>
 
         <!-- Upload Form -->
         <section class="upload-section">
@@ -98,46 +284,6 @@
                             <button type="submit" class="btn btn-primary" id="submitBtn">समाचार अपलोड गर्नुहोस्</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Upload Guidelines -->
-        <section class="upload-guidelines">
-            <div class="container">
-                <h2 class="section-title">अपलोड गाइडलाइनहरू</h2>
-                <div class="guidelines-grid">
-                    <div class="guideline-card">
-                        <div class="guideline-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h3>सामग्रीको गुणस्तर</h3>
-                        <p>समाचार सही, प्रमाणित र नयाँ हुनुपर्छ। गलत जानकारी वा पुरानो समाचार अपलोड नगर्नुहोस्।</p>
-                    </div>
-                    
-                    <div class="guideline-card">
-                        <div class="guideline-icon">
-                            <i class="fas fa-language"></i>
-                        </div>
-                        <h3>भाषा र शैली</h3>
-                        <p>समाचार नेपाली भाषामा लेख्नुहोस् र स्पष्ट, सरल शब्दहरू प्रयोग गर्नुहोस्।</p>
-                    </div>
-                    
-                    <div class="guideline-card">
-                        <div class="guideline-icon">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <h3>तस्बिरहरू</h3>
-                        <p>तस्बिरहरू स्पष्ट, उच्च गुणस्तरका र समाचारसँग सम्बन्धित हुनुपर्छ।</p>
-                    </div>
-                    
-                    <div class="guideline-card">
-                        <div class="guideline-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>सुरक्षा र नैतिकता</h3>
-                        <p>समाचार नैतिक मानदण्डहरूको पालना गर्दै लेख्नुहोस् र कुनै पनि हानिकारक सामग्री नराख्नुहोस्।</p>
-                    </div>
                 </div>
             </div>
         </section>
